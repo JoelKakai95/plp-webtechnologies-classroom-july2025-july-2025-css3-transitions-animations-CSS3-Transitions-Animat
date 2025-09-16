@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS & JavaScript Animation Showcase</title>
+    <style>
+        /* Base styles and reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0 15px;
+            color: #ffdd59;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 20px 0 10px;
+            color: #ffdd59;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Part 1: CSS3 Transitions and Animations */
+        .animation-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        /* Button hover effects */
+        .btn-scale {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-scale:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-color-shift {
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .btn-color-shift:hover {
+            background: #45b7aa;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+        
+        .btn-rotate {
+            background: #ffd166;
+            color: #333;
+        }
+        
+        .btn-rotate:hover {
+            transform: rotate(5deg);
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
+        }
+        
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes colorChange {
+            0% { background-color: #ff6b6b; }
+            33% { background-color: #4ecdc4; }
+            66% { background-color: #ffd166; }
+            100% { background-color: #ff6b6b; }
+        }
+        
+        .animated-box {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .bounce-animation {
+            animation: bounce 2s infinite;
+            background: #ff6b6b;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+            background: #4ecdc4;
+        }
+        
+        .color-animation {
+            animation: colorChange 6s infinite;
+        }
+        
+        /* Part 2: JavaScript Functions Section */
+        .function-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .function-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .function-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .function-card input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 10px 0;
+            width: 80%;
+        }
+        
+        .function-card button {
+            margin: 15px 0;
+        }
+        
+        .function-output {
+            min-height: 50px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Part 3: Combined CSS & JavaScript */
+        .combined-section {
+            text-align: center;
+        }
+        
+        .animation-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .animation-target {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            background: #786fa6;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        /* Animation classes to be toggled by JavaScript */
+        .animate-target {
+            transform: rotate(360deg) scale(1.2);
+            background: #f19066;
+            border-radius: 50%;
+        }
+        
+        .slide-in {
+            animation: slideIn 1.5s forwards;
+        }
+        
+        .card {
+            perspective: 1000px;
+            width: 200px;
+            height: 250px;
+            margin: 20px auto;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .card-front {
+            background: #54a0ff;
+            color: white;
+        }
+        
+        .card-back {
+            background: #ff9ff3;
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: #1a2a6c;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 80%;
+            text-align: center;
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .code-comment {
+            color: #6c757d;
+            font-style: italic;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bringing Web Pages to Life</h1>
+            <p>CSS3 Animations & JavaScript Functions</p>
+        </header>
+        
+        <!-- Part 1: CSS3 Transitions and Animations -->
+        <section class="animation-section">
+            <h2>Part 1: CSS3 Transitions and Animations</h2>
+            <p class="code-comment">/* Pure CSS animations and transitions */</p>
+            <p>Hover over these buttons to see CSS transitions in action:</p>
+            
+            <div class="button-container">
+                <button class="btn btn-scale">Scale Effect</button>
+                <button class="btn btn-color-shift">Color Shift</button>
+                <button class="btn btn-rotate">Rotate Effect</button>
+            </div>
+            
+            <p>These elements use CSS keyframe animations:</p>
+            
+            <div class="button-container">
+                <div class="animated-box bounce-animation">Bounce</div>
+                <div class="animated-box pulse-animation">Pulse</div>
+                <div class="animated-box color-animation">Color Change</div>
+            </div>
+        </section>
+        
+        <!-- Part 2: JavaScript Functions -->
+        <section class="animation-section">
+            <h2>Part 2: JavaScript Functions</h2>
+            <p class="code-comment">/* Functions with parameters, return values, and scope demonstration */</p>
+            <p>These buttons trigger JavaScript functions with parameters and return values:</p>
+            
+            <div class="function-section">
+                <div class="function-card">
+                    <h3>String Reverser</h3>
+                    <p>Enter text to reverse it:</p>
+                    <input type="text" id="reverseInput" placeholder="Type something" value="Hello World!">
+                    <button class="btn" onclick="reverseString()">Reverse String</button>
+                    <div class="function-output" id="reverseOutput">Result will appear here</div>
+                </div>
+                
+                <div class="function-card">
+                    <h3>Number Multiplier</h3>
+                    <p>Enter two numbers to multiply them:</p>
+                    <div>
+                        <input type="number" id="num1" value="5" style="width: 60px">
+                        <span> × </span>
+                        <input type="number" id="num2" value="7" style="width: 60px">
+                    </div>
+                    <button class="btn" onclick="multiplyNumbers()">Multiply</button>
+                    <div class="function-output" id="multiplyOutput">Result will appear here</div>
+                </div>
+                
+                <div class="function-card">
+                    <h3>Temperature Converter</h3>
+                    <p>Convert Fahrenheit to Celsius:</p>
+                    <input type="number" id="fahrenheitInput" value="32" placeholder="Fahrenheit">
+                    <button class="btn" onclick="convertTemperature()">Convert</button>
+                    <div class="function-output" id="temperatureOutput">Result will appear here</div>
+                </div>
+                
+                <div class="function-card">
+                    <h3>String Length Calculator</h3>
+                    <p>Calculate the length of a string:</p>
+                    <input type="text" id="lengthInput" placeholder="Type something" value="Hello!">
+                    <button class="btn" onclick="calculateLength()">Calculate Length</button>
+                    <div class="function-output" id="lengthOutput">Result will appear here</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Part 3: Combined CSS Animations with JavaScript -->
+        <section class="animation-section combined-section">
+            <h2>Part 3: Combined CSS Animations with JavaScript</h2>
+            <p class="code-comment">/* JavaScript triggering CSS animations */</p>
+            <p>Use these buttons to control CSS animations with JavaScript:</p>
+            
+            <div class="animation-controls">
+                <button class="btn" onclick="toggleAnimation()">Toggle Animation</button>
+                <button class="btn" onclick="changeColor()">Change Color</button>
+                <button class="btn" onclick="resetAnimation()">Reset Animation</button>
+                <button class="btn" onclick="flipCard()">Flip Card</button>
+                <button class="btn" onclick="showModal()">Show Modal</button>
+            </div>
+            
+            <div class="animation-target" id="animatedElement">
+                Animated Element
+            </div>
+            
+            <p>Click "Flip Card" to trigger this animation with JavaScript:</p>
+            <div class="card" id="flipCard">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Front Side
+                    </div>
+                    <div class="card-back">
+                        Back Side
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h2>Animated Modal</h2>
+                <p>This modal uses a combination of CSS transitions and JavaScript!</p>
+                <button class="btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Assignment: Bringing Web Pages to Life with CSS & JavaScript</p>
+        </footer>
+    </div>
+
+    <script>
+        // Part 2: JavaScript Functions — Scope, Parameters & Return Values
+        
+        // Global variable to demonstrate scope
+        let globalCounter = 0;
+        
+        // Function to reverse a string - demonstrates parameters and return values
+        function reverseString() {
+            // Local variable
+            const inputText = document.getElementById('reverseInput').value;
+            const reversed = inputText.split('').reverse().join('');
+            document.getElementById('reverseOutput').textContent = reversed;
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`reverseString function called. Global counter: ${globalCounter}`);
+            
+            return reversed;
+        }
+        
+        // Function to multiply two numbers - demonstrates helper function
+        function multiplyNumbers() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            
+            // Using a helper function with parameters and return value
+            const result = multiply(num1, num2);
+            
+            document.getElementById('multiplyOutput').textContent = `${num1} × ${num2} = ${result}`;
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`multiplyNumbers function called. Global counter: ${globalCounter}`);
+            
+            return result;
+        }
+        
+        // Helper function for multiplication
+        function multiply(a, b) {
+            return a * b; // Return value
+        }
+        
+        // Function to convert temperature - demonstrates another helper function
+        function convertTemperature() {
+            const fahrenheit = parseFloat(document.getElementById('fahrenheitInput').value);
+            
+            // Using a helper function with parameters and return value
+            const celsius = fahrenheitToCelsius(fahrenheit);
+            
+            document.getElementById('temperatureOutput').textContent = 
+                `${fahrenheit}°F = ${celsius.toFixed(2)}°C`;
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`convertTemperature function called. Global counter: ${globalCounter}`);
+            
+            return celsius;
+        }
+        
+        // Helper function for temperature conversion
+        function fahrenheitToCelsius(f) {
+            return (f - 32) * 5/9; // Return value
+        }
+        
+        // Function to calculate string length
+        function calculateLength() {
+            const inputString = document.getElementById('lengthInput').value;
+            
+            // Using a helper function with parameters and return value
+            const length = getStringLength(inputString);
+            
+            document.getElementById('lengthOutput').textContent = 
+                `"${inputString}" has ${length} character${length !== 1 ? 's' : ''}`;
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`calculateLength function called. Global counter: ${globalCounter}`);
+            
+            return length;
+        }
+        
+        // Helper function for string length
+        function getStringLength(str) {
+            return str.length; // Return value
+        }
+        
+        // Part 3: Combining CSS Animations with JavaScript
+        
+        // Function to toggle animation class
+        function toggleAnimation() {
+            const element = document.getElementById('animatedElement');
+            element.classList.toggle('animate-target');
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`toggleAnimation function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Function to change color randomly
+        function changeColor() {
+            const element = document.getElementById('animatedElement');
+            const colors = ['#786fa6', '#f19066', '#778beb', '#f8a5c2', '#546de5', '#e77f67'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            element.style.backgroundColor = randomColor;
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`changeColor function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Function to reset animation
+        function resetAnimation() {
+            const element = document.getElementById('animatedElement');
+            element.classList.remove('animate-target');
+            element.style.backgroundColor = '#786fa6';
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`resetAnimation function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Function to flip card
+        function flipCard() {
+            const card = document.getElementById('flipCard');
+            card.classList.toggle('flipped');
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`flipCard function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Function to show modal
+        function showModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('show');
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`showModal function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Function to close modal
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('show');
+            
+            // Update global counter
+            globalCounter++;
+            console.log(`closeModal function called. Global counter: ${globalCounter}`);
+        }
+        
+        // Initialize page with some animations
+        window.onload = function() {
+            // Add slide-in animation to sections after page load
+            const sections = document.querySelectorAll('.animation-section');
+            sections.forEach((section, index) => {
+                // Add delay based on index
+                section.style.animationDelay = `${index * 0.2}s`;
+                section.classList.add('slide-in');
+            });
+            
+            console.log('Page loaded. All functions are ready.');
+        };
+    </script>
+</body>
+</html>
